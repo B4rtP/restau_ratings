@@ -1,0 +1,38 @@
+version: '3.9'
+services:
+
+  php:
+    build: .
+    volumes:
+      - ./..:/var/www/html
+      - ./edited-php.ini:/usr/local/etc/php/php.ini
+    ports:
+      - 9000:80
+
+  db:
+    container_name: db
+    image: mysql:8.0
+    volumes:
+      - ./storage/mysql:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - 3306:3306
+
+  # phpmyadmin:
+  #   image: phpmyadmin:latest
+  #   container_name: pma
+  #   links:
+  #     - db
+  #   environment:
+  #     - PMA_HOST=db
+  #     - PMA_PORT=3306
+  #     - PMA_ARBITRARY=1
+  #   restart: always
+  #   ports:
+  #     - 9001:80
+
+
+
+    
