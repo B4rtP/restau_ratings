@@ -1,5 +1,7 @@
 <?php
 
+namespace Src\entities;
+
 use Src\core\Entity;
 
 class Keyword extends Entity {
