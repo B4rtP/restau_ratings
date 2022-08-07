@@ -31,7 +31,9 @@ final class DB {
             'mysql:host=' . $dbHost .
             ';dbname=' . $dbName . ';',
             $username,
-            $password);
+            $password, [
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ
+            ]);
 
     }
 
