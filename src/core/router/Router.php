@@ -4,14 +4,17 @@ namespace Src\core\router;
 
 use Src\exceptions\RouteNotFoundException;
 
-class Router {
+final class Router {
 
     private array $routes = [];
 
     private static ?self $instance = null;
 
 
-    public static function getInstance() {
+    private function __construct()
+    {}
+
+    public static function getInstance():self {
 
         if(is_null(self::$instance)) {
 
@@ -44,9 +47,11 @@ class Router {
 
     }
 
-    public function resolve(string $requestMethod, string $prettyUrl) {
+    public function resolve(string $requestMethod, string $urlQuery) {
 
-        $callback = $this->routes[strtolower($requestMethod)][$prettyUrl] ?? false;
+        $parsedUrl = explode('/', $urlQuery);
+
+        $callback = $this->routes[ strtolower($requestMethod) ][ array_shift($parsedUrl) ] ?? false;
 
         if (! $callback) {
 
@@ -58,7 +63,7 @@ class Router {
             $controller = key($callback);
             $action = $callback[$controller];
 
-            return (new $controller)->runAction($action);
+            return (new $controller)->init($parsedUrl)->runAction($action);
         }
 
         return $callback();
