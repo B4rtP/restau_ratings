@@ -8,10 +8,13 @@ use Src\exceptions\MethodNotFoundException;
 abstract class Controller {
 
     protected PDO $dbc;
+    protected array $urlParams;
 
-    public function init() {
+    public function init(array $urlParams) {
 
         $this->dbc = DB::getInstance()->getConnection();
+        
+        $this->urlParams = $urlParams;
 
         return $this;
 
