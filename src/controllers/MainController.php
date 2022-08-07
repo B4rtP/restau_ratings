@@ -2,11 +2,28 @@
 
 namespace Src\controllers;
 
-class MainController {
+use Src\core\Controller;
+use Src\core\View;
+use Src\entities\AnonymousEntity;
+use Src\services\Formatter;
+use Src\services\helpers\DateTimeFormatter;
+use Src\services\helpers\PercentFormatter;
 
-    public function index() {
+class MainController extends Controller {
 
-        echo 'index action';
+    public function indexAction() {
+
+        $restaurants = AnonymousEntity::fromView($this->dbc, 'restaurants_list')->findAll();
+
+        Formatter::convert($restaurants)->use(
+
+            new PercentFormatter('rev_average'),
+            new DateTimeFormatter('rev_newest')
+        );
+        
+        $data['restaurants'] = $restaurants;
+
+        View::display('default', $data)->setLayout('main');
 
     }
 
