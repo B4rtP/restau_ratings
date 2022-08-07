@@ -12,7 +12,8 @@ class View {
 
         private string $template,
 
-        private array $data){}
+        private array $data
+    ){}
 
 
     public static function display(string $templateName, array $data = []):self {
@@ -50,8 +51,11 @@ class View {
 
         include $this->template;
 
+        if ($_SESSION['message'] ?? false) {
+
+            unset($_SESSION['message']);
+
+        }
+
     }
-
-
-
 }
