@@ -2,9 +2,20 @@
 
 namespace Src\core;
 
+use PDO;
 use Src\exceptions\MethodNotFoundException;
 
 abstract class Controller {
+
+    protected PDO $dbc;
+
+    public function init() {
+
+        $this->dbc = DB::getInstance()->getConnection();
+
+        return $this;
+
+    }
 
     public function runAction($action) {
 
