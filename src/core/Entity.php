@@ -4,11 +4,9 @@ namespace Src\core;
 
 use PDO;
 
-abstract class Entity {
+class Entity {
 
-    protected string $joinedTable;
-
-    protected function __construct(
+    public function __construct(
 
         protected PDO $dbc,
         protected string $table
@@ -24,6 +22,12 @@ abstract class Entity {
         $stmt->execute();
 
         return $stmt->fetchAll();
+
+    }
+
+    public static function fromView(PDO $dbc, string $table):static {
+
+        return new static($dbc, $table);
 
     }
 
@@ -63,5 +67,7 @@ abstract class Entity {
         return $stmt->fetchAll();
 
     }
+
+
 
 }
