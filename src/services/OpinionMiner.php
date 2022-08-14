@@ -4,52 +4,52 @@ namespace Src\services;
 
 use PDO;
 use Src\entities\Keyword;
+use Src\enums\MatchMode;
+use Src\enums\OpinionResult;
 
 class OpinionMiner {
-
-    const NO_MATCHES =  'no matches';
-    const NEGATIVE = 'negative';
-    const MIDDLE = 'middle';
-    const POSITIVE = 'positive';
 
     public function __construct(
 
         private PDO $dbc
+
     ) {}
 
-    public function run(string ...$inputs) {
+    public function fromInput(string ...$inputs) {
+        
+        $parsed = explode(' ', implode(' ', $inputs));
 
-        $merged = implode(' ', $inputs);
-
-        $keywordObjs = (new Keyword($this->dbc))->findAll();
+        $keywords = (new Keyword($this->dbc))
+        ->select('keyword', 'type')
+        ->findMatches(['keyword'], $parsed, MatchMode::STRICT);
 
         $score = 0;
 
-        foreach ($keywordObjs as $kwObj) {
+        foreach ($keywords as $keyword) {
 
-            if (strpos($merged, (string) $kwObj->keyword) !== false) {
+            if ( (int) $keyword->type === 1) {
 
-                (int) $kwObj->type === 1 ? $score++ : $score-- ;
+                $score++;
 
-                $matchedAtLeastOnce = true;
+            } else {
+
+                $score--;
 
             }
-
         }
 
         if ($score > 0) {
 
-            return self::POSITIVE;
+            return OpinionResult::POSITIVE;
 
         }
 
         if ($score < 0) {
 
-            return self::NEGATIVE;
+            return OpinionResult::NEGATIVE;
 
         }
 
-        return $matchedAtLeastOnce ?? false ? self::MIDDLE : self::NO_MATCHES;
+        return $keywords ? OpinionResult::EQUALITY : OpinionResult::NO_MATCHES;
     }
-
 }
