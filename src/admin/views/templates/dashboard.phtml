@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+    <?php include VIEW_PATH . 'components/head.phtml' ?>
+</html>
+
+<body class="bg-hamburger">
+    <form method="post" action="/admin/logout">
+        <div class="mt-1" style="display: inline-block;">
+            <button type="submit" class="btn btn-outline-light">Logout</button>
+            <a class="btn btn-outline-light" href="/admin">menu</a>
+        </div>
+    </form>
+    <?= include VIEW_PATH . 'layouts/' . $this->layout . '.phtml' ?>
+</body>

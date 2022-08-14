@@ -1,0 +1,92 @@
+
+<div class="text-center dashboard-header">
+    <h2>Keywords</h2>
+</div>
+
+<div class="card custom-inline card-border p-3">
+    <div class="row text-center">
+        <div class="col">
+
+            <div class="mb-4">
+                <b>Positive</b>
+            </div>
+
+            <?php foreach($positiveKeywords as $pkw): ?>
+
+                <div class="row ms-5">
+
+                    <div class="col">
+                        <?= $pkw->keyword ?>
+                    </div>
+
+                    <div class="col">
+                        <form class="w-25" method="post" action="/admin/delete_keyword">
+                            <input type="hidden" name="id" value="<?= $pkw->id ?>">
+                            <button type="submit" class="py-0 px-1 m-1 bi-trash btn-danger btn-sm"></button>
+                        </form>
+                    </div>
+
+                </div>
+
+            <?php endforeach ?>
+
+        </div>
+        <div class="col">
+
+            <div class="mb-4">
+                <b>Negative</b>
+            </div>
+
+            <?php foreach($negativeKeywords as $nkw): ?>
+
+                <div class="row ms-5">
+
+                    <div class="col">
+                        <?= $nkw->keyword ?>
+                    </div>
+
+                    <div class="col">
+                        <form class="w-25" method="post" action="/admin/delete_keyword">
+                            <input type="hidden" name="id" value="<?= $nkw->id ?>">
+                            <button type="submit" class="py-0 px-1 m-1 bi-trash btn-danger btn-sm"></button>
+                        </form>
+                    </div>
+
+                </div>
+
+            <?php endforeach ?>
+
+        </div>
+    </div>
+    <div class="card-footer text-center mt-4">
+
+        <div class="row">
+
+            <div class="col">
+                <form method="post" action="">
+                    <input type="hidden" name="type" value="positive">
+                    <input type="text" name="keyword" placeholder="positive keyword">
+                    <div>
+                        <button name="add-keyword" type="submit" value="1" class="mt-3 btn btn-sm btn-primary">Add positive keyword</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col">
+                <form method="post" action="">
+                    <input type="hidden" name="type" value="negative">
+                    <input type="text" name="keyword" placeholder="negative keyword">
+                    <div>
+                        <button type="submit" class="mt-3 btn btn-sm btn-primary">Add negative keyword</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="text-center text-danger">
+            <b><?= $error['kw'] ?? '' ?></b>
+        </div>
+
+    </div>
+</div>

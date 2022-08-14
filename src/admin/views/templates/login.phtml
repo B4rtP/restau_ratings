@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <?php include VIEW_PATH . 'components/head.phtml' ?>
+
+<body class="form-inline">
+
+    <div class="admin-form mt-5">
+        <form method="post" action="">
+            
+            <div class="form-outline mb-4">
+                <label class="form-label">Username</label>
+                <input name="username" value="<?= htmlspecialchars($_POST['username'] ?? '') ?>"
+                type="text" class="form-control shadow" />
+            </div>
+            
+            <div class="form-outline mb-4">
+                <label class="form-label">Password</label>
+                <input name="password" type="password" class="form-control shadow" />
+
+                <div class="text-danger">
+                    <?= $error ?? '' ?>
+                </div>
+            </div>
+        
+            
+            <div class="text-center">
+                <button name="admin-login" type="submit" value="1" class="btn btn-primary btn-block mb-4 shadow">Continue</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

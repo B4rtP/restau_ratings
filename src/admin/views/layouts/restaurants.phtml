@@ -1,0 +1,139 @@
+<div class="text-center dashboard-header">
+    <h2>Restaurants</h2>
+</div>
+
+<div class="card p-5 custom-inline card-border">
+
+
+
+<h5 class="text-decoration-underline text-center mb-5">add new restaurant</h5>
+
+<form method="post" action="" enctype="multipart/form-data">
+    <div class="new-restaurant">
+
+        <div class="row">
+            <div class="col-4">
+                <b>Restaurant name:</b>
+            </div>
+            <div class="col">
+                <input class="form-control" name="name" value="<?= $_POST['name'] ?? '' ?>" type="text">
+                <div class="text-danger">
+                    <?= $errors['name'] ?? '' ?>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-4">
+                <b>Restaurant url name:</b>
+            </div>
+            <div class="col">
+                <input class="form-control" name="url-name" value="<?= $_POST['url-name'] ?? '' ?>" type="text">
+                <div class="text-danger">
+                    <?= $errors['url-name'] ?? '' ?>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+
+            <div class="col-4">
+                <b>Address:</b>
+            </div>
+
+            <div class="col">
+                <input class="form-control" name="address" value="<?= $_POST['address'] ?? '' ?>" type="text">
+                <div class="text-danger">
+                    <?= $errors['address'] ?? '' ?>
+                </div>
+            </div>
+
+        </div>
+        <div class="row mt-3">
+
+            <div class="col-4">
+                <b>Cuisine:</b>
+            </div>
+
+            <div class="col">
+                <input class="form-control" name="cuisine" value="<?= $_POST['cuisine'] ?? '' ?>" type="text">
+                <div class="text-danger">
+                    <?= $errors['cuisine'] ?? '' ?>
+                </div>
+            </div>
+
+        </div>
+        <div class="row mt-3">
+
+            <div class="col-4">
+                <b>Image:</b>
+            </div>
+
+            <div class="col">
+                <input name="image" type="file" class="form-control" />
+                <i>recommended image side ratio is 3:2</i>
+                <div class="text-danger">
+                    <?= $errors['image'] ?? '' ?>
+                </div>
+            </div>
+
+        </div>
+        <div class="row mt-3">
+
+            <div class="col-4">
+                <b>Image blur:</b>
+            </div>
+
+            <div class="col">
+                <input class="form-control" name="blur" value="<?= $_POST['blur'] ?? '10' ?>" type="number">
+                <div class="text-danger">
+                    <?= $errors['blur'] ?? '' ?>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="text-center">
+            <button class="btn btn-primary mt-4" type="submit">Add restaurant</button>
+        </div>
+
+    </div>
+</form>
+<hr>
+
+
+    <?php foreach($restaurants as $restaurant): ?>
+
+        <form method="post" action="/admin/delete_restaurant">
+            <input type="hidden" name="id" value="<?=$restaurant->id?>">
+            <button type="submit" class="btn btn-danger float-end bi-trash"></button>
+        </form>
+
+        <div class="mb-5 row">
+
+            <h4><?= $restaurant->name ?></h4>
+
+            <div class="col">
+                <div>
+                    <img class="mt-2 img-fluid" width="65%" src="/assets/images/restaurants/<?=$restaurant->image?>" alt="">
+                </div>
+            </div>
+
+            <div class="col">
+                <div>
+                    <b>url name:</b> <?= $restaurant->url_name ?>
+                </div>
+                <div class="mt-2">
+                    <b>Address:</b> <?= $restaurant->address ?>
+                </div>
+                <div class="mt-2">
+                    <b>Cuisine:</b> <?= $restaurant->cuisine ?>
+                </div>
+            </div>
+
+        </div>
+
+        <hr>
+
+    <?php endforeach ?>
+</div>
