@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <?php include VIEW_PATH. 'components/head.phtml' ?>
+    </head>
+
+    <header>
+        <?php include VIEW_PATH. 'components/navbar.phtml' ?>
+    </header>
+
+    <body>
+        <?php $this->layout ? include VIEW_PATH . 'layouts/' . $this->layout . '.phtml' : ''  ?>
+    </body>
+
+    <footer>
+        <?php include VIEW_PATH. 'components/footer.phtml' ?>
+    </footer>
+    
+</html>
+    

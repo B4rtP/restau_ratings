@@ -1,0 +1,51 @@
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom shadow">
+    <div class="container-fluid">
+
+        <div class="pe-3">
+            <a class="navbar-brand" href="/"><img class="nav-img" src="/assets/images/rr-logo.png" alt=""></a>
+        </div>
+
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav navlink-custom">
+
+                <li class="nav-item px-3">
+                    <a class="nav-link" href="/">Restaurants</a>
+                </li>
+
+                <?php if($_SESSION['user-id'] ?? false): ?>
+
+                    <li class="nav-item px-3">
+                        <a class="nav-link" href="#">My reviews</a>
+                    </li>
+                    <li class="nav-item px-3">
+                        <a class="nav-link" href="#">My account</a>
+                    </li>
+
+                <?php endif ?>
+
+            </ul>
+        </div>
+
+        <div class="mx-1 login">
+
+            <?php if ($_SESSION['user-id'] ?? false): ?>
+
+                <div class="px-3 d-inline">
+                    <a class="btn btn-outline-light sign-in" href="/sign_out">Sign out</a>
+                </div>
+
+            <?php else: ?>
+
+                <div class="px-3 d-inline">
+                    <a class="btn btn-outline-light border-0" href="/sign_in">Sign in</a>
+                </div>
+
+                <div class="px-3 d-inline">
+                    <a class="btn btn-outline-light sign-in" href="/sign_up">Sign up</a>
+                </div>
+
+            <?php endif ?>
+
+        </div>
+    </div>
+</nav>

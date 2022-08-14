@@ -1,0 +1,101 @@
+<body class="bg-hamburger">
+
+    <div class="text-center mt-3">
+        <h3 class="message"><?= $_SESSION['message'] ?? ''?></h3>
+    </div>
+
+    <div class="m-5">
+
+        <form class="inline-content" method="post" action="/search">
+            <div class="container">
+                <div class="row">
+                    <h1 class="col-sm custom-header">Restaurants</h1>
+                    <input class="search-input col-3" type="text" name="searchfield"
+                    value="<?= htmlspecialchars($_POST['searchfield'] ?? '') ?>" placeholder="restaurants, cuisines or addresses">
+                    <button type="submit" name="search" value="1" class="custom-btn btn btn-outline-light bi-search ms-2 col-1"></button>
+                </div>
+            </div>
+        </form>
+        
+        <div class="card card-border main-card-bg inline-content shadow p-5 mx-3">
+            <div class="text-left">
+                <div class="container">
+
+                    <?php foreach($restaurants as $r): ?>
+
+                        <div class="row">
+                            <div class="col">
+
+                                <h3 class="rest-name">
+                                    <a href="/restaurant/<?=$r->rr_url?>"><?= $r->rr_name ?></a>
+                                </h3>
+
+                                <div class="stars-div">
+                                    <img class="empty-stars" src="/assets/images/rating-stars/empty-stars.png" alt="">
+                                    <img src="/assets/images/rating-stars/filled-stars.png" class="full-stars"
+                                        style='clip-path: inset(0% <?=100 - $r->rev_average.'%'?> 0% 0%)'>
+                                </div>
+
+                                <div class="mt-4">
+                                    <p>total reviews: <b><?= $r->rev_total ?? 0 ?></b></p>
+                                    
+                                    <p>cuisine: <b><?= $r->rr_cuisine ?></b></p>
+
+                                    <p>address: <b><?= $r->rr_address ?></b></p>
+                                </div>
+
+                            </div>
+
+                            <div class="col-6 ms-auto">
+
+                                <?php if ($r->rev_id ?? false): ?>
+
+                                    <div class="card p-3 shadow">
+                                        <div class="">
+
+                                            <h5 class="section-header text-center">newest review</h5>
+
+                                            <div class="mt-3">
+                                                User: <?= $r->username ?>
+                                                
+                                                <p class="float-end">
+                                                    <data><?= $r->rev_newest ?></data>
+                                                </p>
+
+                                                <div>
+                                                    
+
+
+                                                    <!-- $r->review_result TODO -->
+                                                        
+
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+
+                                        <div class="review-h">
+                                            <h5><?=$r->rev_header?></h5>
+                                        </div>
+
+                                        <div class="review-p">
+                                            <p><?=$r->rev_content?></p>
+                                        </div>
+
+                                    </div>
+
+                                <?php endif ?>
+
+                            </div>
+                        </div>
+                        
+                        <hr>
+
+                    <?php endforeach ?>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

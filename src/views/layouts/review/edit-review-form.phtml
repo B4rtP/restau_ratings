@@ -1,0 +1,50 @@
+<div class="py-4">
+
+    <h4 class="text-center my-4">
+        Edit or update my review of <?= $restaurant->name ?>
+    </h4>
+
+    <form method="post" action="">
+
+        <div class="text-left custom-inline">
+
+            <div class="custom-input">
+                <h5>Header</h5>
+                <input name="new-header" value="<?= $_POST['new-header'] ?? $oldReview->header ?>"
+                class="header" type="text"placeholder="Header of your review">
+
+                <div class="text-danger">
+                    <?= $errors['header'] ?? '' ?>
+                </div>
+
+            </div>
+
+            <div class="mt-4">
+                <h5>Content</h5>
+                <textarea name="new-content" class="content custom-textarea" rows="10"
+                placeholder="Content of your review"
+                ><?= $_POST['new-content'] ?? $oldReview->content ?></textarea>
+
+                <div class="text-danger">
+                    <?= $errors['content'] ?? '' ?>
+                </div>
+
+            </div>
+
+        </div>
+
+        <input type="hidden" name="review-id" value="<?= $oldReview->review_id ?>">
+
+        <div class="my-3 text-center ">
+
+            <div class="custom-inline">
+                <a class="bi-back my-anchor float-start d-inline p-2" href="/my_review/<?=$restaurant->url_name?>"> Back</a>
+                <button class="d-inline my-btn p-2" name="update-review"
+                type="submit" value="1">Update my review</button>
+            </div>
+
+        </div>
+
+    </form>
+    
+</div>

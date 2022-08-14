@@ -1,0 +1,125 @@
+<body class="rt-background" style='background-image: url(/assets/images/restaurants/<?=$restaurant->rr_image?>)'>
+    <div class="mt-5 card-inline">
+        <div class="text-center">
+            <h1 class="custom-header"><?= $restaurant->rr_name ?></h1>
+        </div>
+        <div class="card inline-content mx-auto card-border shadow mt-3 mb-5">
+            <div class="bg-1 p-4">
+                <div class="card-top">
+                    <div class="text-start p-2">
+                        <a class="bi-back my-anchor d-inline-block" href="/"> Main page</a>
+                    
+                        <img class="rest-card-stars" src="/assets/images/rating-stars/empty-stars.png" alt="">
+                        <img src="/assets/images/rating-stars/filled-stars.png" class="rest-card-stars"
+                            style='clip-path: inset(0% <?=100 - $restaurant->rev_average?>% 0% 0%)'>
+                    </div>
+                </div>
+        
+                <div class="card-body">
+                    <div class="row">
+                        
+        
+                        <div class="rr-data">
+
+                            <div class="col pt-2">
+                                <b>Ratings:</b> <?= $restaurant->rev_average ?? 0?>%
+                            </div>
+
+                            <div class="pt-3">
+                                <b>Total reviews:</b> <?= $restaurant->rev_total ?? 0 ?>
+                            </div>
+
+                            <div class="pt-3">
+                                <b>Cuisine:</b> <?= $restaurant->rr_cuisine ?>
+                            </div>
+                            
+                            <div class="pt-3">
+                                <b>Address: </b> <?= $restaurant->rr_address ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+
+                <?php if ($userLogged): ?>
+
+                    <div>
+                        <?php if ($userReviewed): ?>
+                            <a class="large-btn" href="/my_review/<?=$restaurant->rr_url?>"><b>Edit my review</b></a>
+                        <?php else: ?>
+                            <a class="large-btn" href="/my_review/<?=$restaurant->rr_url?>"><b>Add my review</b></a>
+                        <?php endif ?>
+                    </div>
+
+                <?php else: ?>
+
+                    <div style="font-size: 85%;">
+                        <b><a class="large-btn" href="/sign_in">sign in to rate this restaurant</a></b>
+                    </div>
+
+                <?php endif ?>
+
+            </div>
+
+            <div class="card-footer bg-2">
+
+                <div class="text-center my-3">
+                    <h3>
+                        Reviews
+                    </h3>
+                    <hr style="margin-inline: 20%;">
+                </div>
+
+                <div>
+
+                    <?php if (! $reviews): ?>
+
+                        <div class="text-center mb-2">
+                            No reviews yet
+                        </div>
+
+                    <?php endif ?>
+                
+                    <?php foreach ($reviews as $review): ?>
+
+                        <?php if (is_numeric($review->result)): ?>
+                        
+                        <div class="mt-4">
+                            <img class="star-icon" src="/assets/images/rating-stars/rating-star-empty.png" alt="">
+                    
+                            <img src="/assets/images/rating-stars/rating-star-full.png" class="star-icon"
+                            style='clip-path: inset(<?= 100 - $review->result ?>% 0% 0% 0%)'>
+                        </div>
+
+                        <?php endif ?>
+
+                        <div class="text-center text-decoration-underline" style="font-size: 105% ; color: #8c3838;">
+                            <b>
+                                <?= $review->author ?>
+                            </b>'s review published
+                            <b>
+                                <?= $review->latest_alteration ?>
+                            </b>
+                        </div>
+
+                        <div class="text-center">
+                            <div class="mt-4">
+                                <h5>
+                                    <?= $review->header ?>
+                                </h5>
+                            </div>
+                            <div class="mt-3 mx-5">
+                                <?= $review->content ?>
+                            </div>
+                        </div>
+
+                        <hr class="mx-3">
+
+                    <?php endforeach ?>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

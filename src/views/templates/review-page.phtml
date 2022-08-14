@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <?php include VIEW_PATH . 'components/head.phtml' ?>
+    </head>
+
+    <header>
+        <?php include VIEW_PATH . 'components/navbar.phtml'?>
+    </header>
+
+    <body class="rt-background" style='background-image: url(/assets/images/restaurants/<?=$restaurant->image?>)'>
+
+        <div class="card shadow my-5 p-2 review-card-inline review-card-border">
+            <?php $this->layout ? include VIEW_PATH .
+            'layouts/review/' . $this->layout . '.phtml' : ''  ?>
+        </div>
+        
+    </body>
+    
+    <footer>
+        <?php include VIEW_PATH . 'components/footer.phtml'?>
+    </footer>
+
+</html>

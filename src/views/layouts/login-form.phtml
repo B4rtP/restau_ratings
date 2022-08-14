@@ -1,0 +1,41 @@
+<body class="bg-hamburger">
+    <form method="POST" action="">
+        <div class="custom-card custom-inline">
+            <div class="card p-3 my-5 shadow my-border">
+
+                <div class="text-center login-header mt-5">
+                    <h4>Fill in this form to sign in to your account</h4>
+                </div>
+
+                <div class="custom-input custom-inline my-2">
+
+                    <div class="row">
+                        <b class="">Email</b>
+                        <input name="email" value="<?=htmlspecialchars($_POST['email'] ?? '')?>
+                        "placeholder="Enter your email" type="email" class="col">
+                    </div>
+
+                    <div class="row mt-4">
+                        <b class="">Password</b>
+                        <input name="password" value="<?=htmlspecialchars($_POST['password'] ?? '')?>"
+                        placeholder="Enter your password" type="password" class="col">
+                    </div>
+
+                    <div class="text-danger">
+                        <?= $error ?? '' ?>
+                    </div>
+
+                    <div class="my-5 text-center">
+                        <button name="login" type="submit" value="1" class="my-btn px-3 py-2">Sign in</button>
+                    </div>
+
+                </div>
+
+                <div class="text-center not-registered">
+                    <p>Not registered yet? <b><a href="/sign_up">Sign up</a></b></p>
+                </div>
+                
+            </div>
+        </div>
+    </form>
+</body>

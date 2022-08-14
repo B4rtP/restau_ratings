@@ -1,0 +1,61 @@
+<body class="bg-hamburger">
+    <form method="post" action="/sign_up">
+        <div class="custom-card custom-inline">
+            <div class="card p-3 my-5 shadow my-border">
+
+                <div class="text-center login-header mt-5">
+                    <h4>Fill in this form to create your account</h4>
+                </div>
+
+                <div class="custom-input custom-inline my-2">
+
+                    <div class="row mt-4">
+                        <b class="">Username</b>
+                        <input name="username" value="<?=htmlspecialchars($_POST['username'] ?? '')?>" placeholder="Choose your username"
+                            type="text" class="col">
+                        <div class="text-danger">
+                            <?= $errors['uname'] ?? '' ?>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <b class="">Email</b>
+                        <input name="email" value="<?=htmlspecialchars($_POST['email'] ?? '')?>" placeholder="Enter your email"
+                            type="email" class="col">
+                        <div class="text-danger">
+                            <?= $errors['email'] ?? '' ?>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <b class="">Password</b>
+                        <input name="password" value="<?=htmlspecialchars($_POST['password'] ?? '')?>" placeholder="Choose your password"
+                            type="password" class="col">
+                        <div class="text-danger">
+                            <?= $errors['password'] ?? '' ?>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <b class="">Repeated password</b>
+                        <input name="pwd-repeat" value="<?=htmlspecialchars($_POST['pwd-repeat'] ?? '')?>" placeholder="Repeat your password"
+                            type="password" class="col">
+                        <div class="text-danger">
+                            <?= $errors['pwd-repeat'] ?? '' ?>
+                        </div>
+                    </div>
+
+                    <div class="my-5 text-center">
+                        <button name="register" type="submit" value="1" class="my-btn px-3 py-2">Sign up</button>
+                    </div>
+
+                </div>
+
+                <div class="text-center not-registered">
+                    <p>Already registered? <b><a href="/sign_in">Sign in</a></b></p>
+                </div>
+                
+            </div>
+        </div>
+    </form>
+</body>
