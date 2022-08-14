@@ -1,0 +1,444 @@
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+footer {
+    margin-top: auto;
+}
+
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* ------------------------ GENERAL ---------------------*/
+.inline-content {
+
+    margin-inline: 18% !important;
+
+}
+
+.card-border {
+
+    border: 4.5px solid #355C7D;
+
+}
+
+/* ------------------------ GENERAL END ---------------------*/
+
+/* ------------------------navbar---------------------- */
+.navbar-custom {
+    background: #355C7D;
+    font-size: 23px !important;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.nav-img {
+    width: 6.5rem;
+    height: auto;
+}
+.navbar-custom ul li a {
+    border-radius: 7px;
+}
+.navbar-custom ul li a:hover {
+    background-color: #8c3838;
+    transition: 0.3s;
+    color: #fafafa !important;
+}
+
+.navlink-custom li a{
+    color: rgba(226, 226, 226, 0.858) !important;
+}
+
+.login a{
+    font-size: 20px !important;
+}
+
+.login a:hover {
+    background-color: #8c3838;
+    color: #fafafa;
+    transition: 0.3s;
+}
+
+
+/* ------------------------navbar END---------------------- */
+
+/* ------------------------MAIN PAGE---------------------- */
+
+.main-card-bg {
+
+    background-color: #ffe8e8;
+
+}
+.custom-header {
+    color: white;
+    -webkit-text-stroke-width: 1.5px;
+    -webkit-text-stroke-color: black;
+    font-weight: bold;
+}
+.message {
+    color: white;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+    font-weight: bold;
+}
+.custom-btn {
+    margin-top: 1px;
+    width: 42px;
+    height: 40px;
+    display: block;
+}
+.search-input {
+    height: 2.6rem;
+    border: 3px solid #355C7D;
+    border-radius: 5px;
+    width: 16.5rem;
+}
+.search-input:focus {
+    border: 3px solid #8c3838;
+    background-color: #fff6f6;
+    transition: 0.3s;
+    outline: 1px solid #8c3838;
+}
+
+.rest-name a{
+    color: #355C7D !important;
+}
+.rest-name a:hover {
+    color: #8c3838 !important;
+    transition: 0.35s;
+}
+
+.bg-hamburger {
+    background-image: url(/assets/images/burger-blurried.jpg);
+    background-size: cover;
+    height: 100vh;
+    background-attachment: fixed;
+    -webkit-background-size: cover;
+}
+
+.section-header {
+    color: #355C7D;
+}
+
+.review-h {
+    text-align: center;
+    display: -webkit-box;
+    max-width: 100%;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.review-p {
+    display: -webkit-box;
+    max-width: 100%;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* ----------------------------SINGLE RESTAURANT----------------------- */
+
+.rt-background {
+    background-size: cover;
+    height: 100vh;
+    background-attachment: fixed;
+    -webkit-background-size: cover;
+}
+
+.header {
+    border: 2px solid #355C7D;
+    border-radius: 3.5px;
+    width:100%;
+    padding: 3px;
+}
+.content {
+    border: 2px solid #355C7D;
+    border-radius: 3.5px;
+    width: 100%;
+    padding: 5px;
+}
+
+.my-btn {
+    border-radius: 5px;
+    border: 1.5px solid black;
+    font-size: 18px;
+    color: #000000;
+    background-color: #355b7d7a;
+    font-weight: 600;
+    
+}
+
+.my-btn:hover {
+    background-color: #355C7D;
+    color: #ffffff;
+    transition: 0.45s;
+    font-weight: 400;
+    border: 1.5px solid #ffffff;
+    font-weight: 600;
+}
+
+.my-anchor {
+    background-color: #355b7d7a;
+    display: inline-block;
+    border-radius: 5px;
+    border: 1.5px solid black;
+    font-size: 18px;
+    padding: 0.7%;
+    width: auto;
+    margin-inline: auto;
+    text-decoration: none;
+    color: #000000;
+    text-align: center;
+    
+}
+.my-anchor:hover {
+    background-color: #355C7D;
+    color: #ffffff;
+    transition: 0.45s;
+    font-weight: 400;
+    border: 1.5px solid #ffffff;
+}
+
+.custom-a {
+    color: #355b7dec;
+    font-size: 102%;
+}
+.custom-a:hover {
+    color: #8c3838;
+    transition: 0.45s;
+}
+
+.star-icon {
+    width: 7.5%;
+    position: absolute;
+    margin-left: 4.5%;
+    left: 0;
+}
+
+.large-btn {
+    text-align: center;
+    padding: 0.65%;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    color: #355C7D;
+    font-size: 120%;
+}
+.large-btn:hover {
+    background-color: #355C7D;
+    transition: 0.65s;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.rr-data {
+
+    font-size: 110%;
+    text-decoration: underline;
+
+}
+
+/* ----------------------------SINGLE RESTAURANT END----------------------- */
+/*---------------REVIEW------------*/
+
+.review-card-border {
+
+    border: 3px solid #355C7D;
+
+}
+
+.cancel-btn {
+
+    background-color: #8c38387c;
+    color: #000000;
+    padding: 1.15%;
+    border: 1px solid black;
+    border-radius: 5px;
+    text-decoration: none;
+}
+.cancel-btn:hover {
+
+    transition: 0.45s;
+    background-color: #8c3838;
+    color: #ffffff;
+    border: 1px solid #ffffff; 
+}
+.delete-btn {
+    background-color: #ff910058;
+    color: #000000;
+    padding: 1.15%;
+    border: 1px solid black;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.review-card-inline {
+
+    margin-inline: 18%;
+
+}
+
+/*---------------REVIEW END------------*/
+
+/*------------------------ENTRY FORM--------------------------------------*/
+
+.not-registered a {
+    color: #355C7D;
+}
+.not-registered a:hover {
+    color: #8c3838;
+    transition: 0.25s;
+}
+
+.custom-card {
+    margin-inline: 25%;
+}
+
+.my-border {
+    border: 4px solid #355C7D;
+}
+
+.custom-inline {
+    margin-inline: 20%;
+}
+.custom-input input {
+    height: 42px;
+    border: 3px solid #355C7D;
+    border-radius: 5px;
+    font-size: 18px;
+}
+
+.custom-input input:focus {
+    height: 42px;
+    border: 3px solid #8c3838;
+    background-color: #fff6f6;
+    outline: 1px solid #8c3838;
+    transition: 0.5s;
+}
+
+.custom-textarea {
+    font-size: 18px;
+    border: 3px solid #355C7D;
+    border-radius: 5px;
+}
+
+.custom-textarea:focus {
+    border: 3px solid #8c3838ec;
+    background-color: #fff6f6;
+    outline: none;
+}
+/*------------------------ENTRY FORM END----------------------*/
+
+/*-------------------ADMIN AREA----------------------------*/
+
+.form-inline {
+
+    margin-inline: 40%;
+
+}
+
+.dashboard-header {
+
+    color: #ffffff;
+
+}
+
+.dashboard-main-btn {
+
+    color: #000000;
+    text-decoration: none;
+
+}
+
+.dashboard-main-btn:hover {
+
+    transition: 0.4s;
+    color: #b81d1d;
+    text-decoration: underline;
+
+}
+
+/*-------------------ADMIN AREA END----------------------------*/
+
+
+/*---------RATING STARS-------*/
+
+.stars-div {
+    display: inline-block;
+    margin-bottom: 0.5%;
+    
+}
+
+.empty-stars {
+    max-width: 100%;
+    position: absolute;
+    height: 28px;
+}
+
+.full-stars {
+    max-width: 100%;
+    position: absolute;
+    height: 28px;
+}
+
+.rest-card-stars {
+
+    height: 2rem;
+    width: auto;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    display: inline-block;
+}
+.rating {
+
+    margin-left: 12.5%;
+    margin-top: 0.2%;
+}
+
+/*--------------MY REVIEWS------------*/
+
+.btn-anchor {
+
+    border: 1px solid black;
+    text-decoration: none;
+    color: #ffffff;
+    background-color: #355C7D;
+    border-radius: 4px;
+    padding: 0.4rem;
+}
+.btn-anchor:hover {
+
+    transition: 0.45s;
+    color: #ffffff;
+    background-color: #8c3838;
+    border: 1px solid transparent;
+}
+
+.star {
+    width: 2rem;
+    position: absolute;
+    left: 1%;
+}
+
+/*--------------MY REVIEWS END------------*/
+
+/*------------ USER ACCOUNT----------------*/
+
+.settings-card {
+
+    border: 3px solid black;
+    border-radius: 5px;
+}
+
+.settings-items {
+
+    background-color: #355C7D;
+    overflow: hidden;
+}
+/*------------ USER ACCOUNT END----------------*/
