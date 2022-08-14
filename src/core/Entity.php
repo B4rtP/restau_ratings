@@ -3,19 +3,36 @@
 namespace Src\core;
 
 use PDO;
+use Src\enums\MatchMode;
 
 class Entity {
 
+    protected string $selectedColumns = '*';
+
     public function __construct(
 
-        protected PDO $dbc,
-        protected string $table
+        protected ?PDO $dbc = null,
+        protected string $table = ''
 
     ) {}
 
+    public function select(string ...$columns) {
+
+        $this->selectedColumns = implode(',', $columns);
+
+        return $this;
+
+    }
+
+    public static function fromView(PDO $dbc, string $view):static {
+
+        return new static($dbc, $view);
+
+    }
+
     public function findAll() {
 
-        $sql = 'SELECT * FROM '. $this->table;
+        $sql = 'SELECT '. $this->selectedColumns .' FROM '. $this->table;
 
         $stmt = $this->dbc->prepare($sql);
 
@@ -25,13 +42,44 @@ class Entity {
 
     }
 
-    public static function fromView(PDO $dbc, string $table):static {
+    private function find(array $columnsValues) {
 
-        return new static($dbc, $table);
+        $condString = '';
+
+        foreach ($columnsValues as $col => $val) {
+
+            $condString .= $col . ' = :' . $col . ' AND ';
+
+        }
+
+        $sql = 'SELECT ' . $this->selectedColumns . ' FROM ' . $this->table .
+        ' WHERE ' . rtrim($condString, ' AND ');
+
+        return $this->dbc->prepare($sql);
 
     }
 
-    public function findAllFromMatches(array $columns, string|array $lookingFor) {
+    public function findBy(array $columnsValues) {
+
+        $stmt = $this->find($columnsValues);
+
+        $stmt->execute($columnsValues);
+
+        return $stmt->fetch();
+
+    }
+
+    public function findAllBy(array $columnsValues) {
+
+        $stmt = $this->find($columnsValues);
+
+        $stmt->execute($columnsValues);
+
+        return $stmt->fetchAll();
+
+    }
+
+    public function findMatches(array $columns, string|array $lookingFor, MatchMode $mode) {
 
         is_array($lookingFor) ?: $lookingFor = array($lookingFor);
 
@@ -44,12 +92,12 @@ class Entity {
 
                 $whereString .= $col . " LIKE ? OR ";
                 
-                $toBind[] = '%'.$item.'%';
-
+                $toBind[] = MatchMode::from($mode->value)->appendWildcard($item);
+                
             }
         }
 
-        $sql = 'SELECT * FROM ' . $this->table . ' WHERE ' . rtrim($whereString, ' OR ');
+        $sql = 'SELECT ' . $this->selectedColumns . ' FROM ' . $this->table . ' WHERE ' . rtrim($whereString, ' OR ');
 
         $stmt = $this->dbc->prepare($sql);
 
@@ -68,6 +116,53 @@ class Entity {
 
     }
 
+    public function save(array $colsVals) {
 
+        $colString = '';
+        $prepareString = '';
 
+        foreach ($colsVals as $col => $val) {
+
+            $colString .= $col . ',';
+            $prepareString .= ':' . $col . ',';
+
+        }
+
+        $sql = 'INSERT INTO ' . $this->table . ' (' . rtrim($colString, ',') .
+        ') VALUES (' . rtrim($prepareString, ',') . ')';
+
+        $stmt = $this->dbc->prepare($sql);
+
+        $stmt->execute($colsVals);
+
+    }
+
+    public function updateBy(string $column, string $value, array $updateColsVals) {
+
+        $setString = '';
+
+        foreach ($updateColsVals as $col => $val) {
+
+            $setString .= $col . ' = :' . $col . ',';
+
+        }
+
+        $sql = 'UPDATE ' . $this->table . ' SET ' . rtrim($setString, ',') .
+        ' WHERE ' . $column . '=' . $value;
+
+        $stmt = $this->dbc->prepare($sql);
+
+        $stmt->execute($updateColsVals);
+
+    }
+
+    public function deleteBy(string $column, string $value) {
+
+        $sql = 'DELETE FROM ' . $this->table . ' WHERE ' . $column . ' = :' . $column;
+
+        $stmt = $this->dbc->prepare($sql);
+
+        $stmt->execute([$column => $value]);
+
+    }
 }
