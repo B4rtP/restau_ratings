@@ -2,6 +2,7 @@
 
 namespace Src\services;
 
+use Src\exceptions\InvalidDataTypeException;
 use Src\exceptions\InvalidPropertyException;
 use Src\interfaces\HelperInterface;
 
@@ -19,42 +20,38 @@ class Formatter {
 
     }
 
-    public function use(HelperInterface ...$tools):void {
+    public function use(HelperInterface ...$tools):self {
 
         if (is_array($this->subject)) {
 
             foreach ($this->subject as $item) {
 
-                foreach ($tools as $tool) {
-
-                    if (is_object($item)) {
-
-                        $property = $tool->key;
-
-                        property_exists($item, $property) ?: throw new InvalidPropertyException();
-
-                        if (! is_null($item->$property)) {
-
-                            $item->$property = $tool->run($item->$property);
-
-                        }
-                    }
-                    // If not an array...
+                if (! is_object($item)) {
+                    throw new InvalidDataTypeException('object');
                 }
+
+                $this->convertObjectProperty($item, $tools);
             }
             
-            return;
+            return $this;
         }
 
+        $this->convertObjectProperty($this->subject, $tools);
+
+        return $this;
+    }
+
+    private function convertObjectProperty(object $obj, array $tools) {
+
         foreach ($tools as $tool) {
-            
+
             $property = $tool->key;
 
-            property_exists($this->subject, $property) ?: throw new InvalidPropertyException();
+            property_exists($obj, $property) ?: throw new InvalidPropertyException();
 
-            if (! is_null($this->subject->$property)) {
+            if (! is_null($obj->$property)) {
 
-                $this->subject->$property = $tool->run($this->subject->$property);
+                $obj->$property = $tool->run($obj->$property);
 
             }
         }
