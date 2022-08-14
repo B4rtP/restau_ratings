@@ -17,7 +17,7 @@ use Src\services\validatorRules\UrlFriendly;
 class RestaurantController extends Controller {
 
     public function indexAction() {
-
+        
         $this->display();
 
     }
@@ -85,7 +85,14 @@ class RestaurantController extends Controller {
 
         $restaurantId = $_POST['id'];
 
-        (new Restaurant($this->dbc))->deleteBy('id', $restaurantId);
+        $restaurant = new Restaurant($this->dbc);
+
+        $restaurantObj = $restaurant->select('image')->findBy(['id' => $restaurantId]);
+
+        $restaurant->deleteBy('id', $restaurantId);
+
+        unlink(RESTAURANTS_IMAGES . $restaurantObj->image);
+        unlink(UPLOAD_PATH . $restaurantObj->image);
 
         header('Location:/admin/restaurants');
         exit;
