@@ -20,7 +20,7 @@ class ToPercent implements HelperInterface {
             throw new InvalidDataTypeException('numeric');
         }
 
-        return (float) $field * 100;
+        return (float) floor($field * 100);
 
     }
 
